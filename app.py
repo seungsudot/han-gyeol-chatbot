@@ -26,7 +26,7 @@ def chat():
     # GPT 모델 호출
     try:
         completion = client.chat.completions.create(
-            model="ft:gpt-4o-mini-2024-07-18:승수-한결-2025_2",
+            model="ft:gpt-4o-mini-2024-07-18:seungsu:2025-2:CUoDuCEI",
             messages=[
                 {"role": "system", "content": "You are 한결, a friendly Korean friend. 말투는 따뜻하고 자연스럽게 해줘."},
                 {"role": "user", "content": user_message}
@@ -56,5 +56,6 @@ def chat():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
 
 
