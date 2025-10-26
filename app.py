@@ -1,15 +1,17 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from openai import OpenAI
 import os
 
 app = Flask(__name__)
+CORS(app)  #카카오·UptimeRobot 등 외부 요청 허용
 client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
 
-# ✅ 루트 요청 처리 추가 (UptimeRobot용)
-@app.route("/", methods=["GET"])
-def home():
-    return "Server is alive!", 200
+# GET /chat 요청 처리 (헬스체크용)
+@app.route("/chat", methods=["GET"])
+def health_check():
+    return jsonify({"status": "OK"}), 200
 
 
 
@@ -54,4 +56,5 @@ def chat():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
 
