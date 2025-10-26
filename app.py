@@ -5,6 +5,14 @@ import os
 app = Flask(__name__)
 client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
 
+
+# ✅ 루트 요청 처리 추가 (UptimeRobot용)
+@app.route("/", methods=["GET"])
+def home():
+    return "Server is alive!", 200
+
+
+
 @app.route("/chat", methods=["POST"])
 def chat():
     try:
@@ -46,3 +54,4 @@ def chat():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
