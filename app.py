@@ -31,13 +31,13 @@ def chat():
                 {"role": "system", "content": "You are 한결, a friendly Korean friend. 말투는 친구랑 대화하듯 자연스럽게 해줘."},
                 {"role": "user", "content": user_message}
             ],
-            temperature=0.7
+            temperature=0.7,
             max_tokens=150,   # 응답 길이 제한 → 속도 향상
             timeout=4         # 4초 내 응답 제한 (카카오 타임아웃 방지)
         )
         gpt_reply = completion.choices[0].message.content.strip()
     except Exception as e:
-        gpt_reply = "승수가 서버비 안내서 에러났다. ㅅㅂ 돈 좀 줘라"
+        gpt_reply = "오류났다 이기. 생각할 시간을 안주노"
 
     # 카카오 오픈빌더 응답 포맷
     response_body = {
@@ -58,6 +58,7 @@ def chat():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
 
 
 
